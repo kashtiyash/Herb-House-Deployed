@@ -1,0 +1,161 @@
+{% extends 'mainapp/basic.html' %}
+
+{% block title %}
+Product Lists
+{% endblock%}
+{%block css%}
+
+#feedback-form {
+width: 100%;
+padding: 20px 50px 40px;
+box-shadow: 1px 4px 10px 1px #aaa;
+}
+
+
+#feedback-form h2{
+text-align: center;
+margin-bottom: 30px;
+}
+
+#feedback-form input {
+margin-bottom: 15px;
+margin-top: 15px;
+}
+
+#feedback-form input[type=text] {
+display: block;
+height: 32px;
+padding: 6px 16px;
+width: 100%;
+border: none;
+background-color: #f3f3f3;
+}
+
+#feedback-form textarea {
+display: block;
+padding: 6px 16px;
+width: 100%;
+border: none;
+background-color: #f3f3f3;
+}
+
+
+
+.loginheading{
+font-weight: 400;
+font-size: 4vw;
+}
+
+.loginheading1{
+color: #216B39;
+font: 34px Arial, sans-serif, Verdana;
+font-size-adjust: 0.58;
+font-weight: 800;
+text-decoration: none;
+}
+.loginheading2{
+color: #000000;
+font: 34px Arial, sans-serif, Verdana;
+font-size-adjust: 0.58;
+font-weight: 800;
+text-decoration: none;
+
+.cardbutton {
+background-color: rgba(33,107,57);
+cursor: pointer;
+transition: 0.4s;
+color: white;
+}
+
+.cardbutton:hover {
+background-color: rgba(33,107,57);
+border: 3px solid #FFFFFF;
+transform: scale(0.9, 0.9);
+color: white;
+border-radius: 25px;
+}
+
+.nurserydetails{
+width: 100%;
+padding: 20px;
+box-shadow: 1px 4px 10px 1px #aaa;
+}
+
+
+.viewdetails{
+display: flex;
+flex-direction: row-reverse;
+}
+
+.productdetails{
+width: 100%;
+padding: 20px;
+box-shadow: 1px 4px 10px 1px #aaa;
+}
+
+.input-group-text {
+    display: flex;
+    align-items: center;
+    padding: 0.725rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+
+{% endblock %}
+
+
+{% block body %}
+
+
+  <div class="col text-center">
+    <h1 class="loginheading pt-3 pb-3"><span class="loginheading1">Product </span><span
+        class="loginheading2">List</span></h1>
+  <br><br>
+  </div>
+  {% for product in props %}
+
+
+
+     <div class="row mb-5">
+        <div class="col text-left">
+          <div class="productdetails">
+            <div class="row">
+              <div class="col col-3">
+                  <br>
+                <img id="myImg" src="{{product.product_image.url}}" class="card-img-top cardimage mt-3" 
+                  style="width:250px ;
+                  height:195px; 
+                  margin-left: 50px;
+                  margin-right: 20px; 
+                  border-width: 2px ;
+                  border-style: outset ;
+                  border-radius: 8px;
+                  border-color: black;
+                  
+          
+                 "
+                  alt="product image">
+
+              </div>
+              <div class="col col-8">
+                         <li class="list-group-item bg-success link-light">Seller ID : <strong>{{product.store_id}}</strong></li>
+                        <li class="list-group-item"> Product Name : <strong>{{product.name}}</strong></li>
+                        <li class="list-group-item">Product ID : <strong>{{product.id}}</strong></li>
+                        <li class="list-group-item">Quantity : <strong>{{product.quantity}}</strong></li>
+                        <li class="list-group-item">Price : <strong>Rs {{product.price}} </strong></li>
+                  <li class="list-group-item"><strong>Description : </strong><p>{{product.description}} </p></li>
+              </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    {% endfor %}
+    {% endblock %}

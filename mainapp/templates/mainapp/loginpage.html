@@ -1,0 +1,430 @@
+{% extends 'mainapp/basic.html' %}
+{% block title %}
+Login / Sign-Up
+{% endblock%}
+{% block css %}
+.cardbutton
+{
+    background-color: rgba(33,107,57);
+    cursor: pointer;
+    transition: 0.4s;
+    color: white;
+}
+
+  .cardbutton:hover
+{
+    background-color: rgba(33,107,57);
+    border: 3px solid #FFFFFF;
+    transform: scale(0.9, 0.9);
+    color: white;
+    border-radius: 15px;
+}
+
+.loginheading{
+    font-weight: 400;
+    font-size: 4vw;
+  }
+  .loginheading1{
+    color: #216B39;
+    font: 32px Arial, sans-serif, Verdana;
+    font-size-adjust: 0.58;
+    font-weight: 800;
+    text-decoration: none;
+  }
+  .loginheading2{
+    color: #000000;
+    font: 32px Arial, sans-serif, Verdana;
+    font-size-adjust: 0.58;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+
+.loginheading3{
+    color : #FF0000;
+    font: 40px Arial, sans-serif, Verdana;
+    font-size-adjust: 0.58;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+
+  .loginbody{
+    display: flex;
+    justify-content: space-evenly;
+     flex: wrap;
+  }
+
+
+
+     .loginbuttons{
+    display: flex;
+    justify-content: center;
+  }
+
+
+  .logoimage {
+    max-width: 250px;
+    max-height: 250px;
+  }
+
+    .form-group {
+    display: flex;
+    flex: 0 0 auto;
+    flex-flow: row wrap;
+    align-items: center;
+    margin-bottom: 0;
+    font-weight: bold;
+    font: Arial, sans-serif, Verdana;
+
+}
+{% endblock %}
+{% block body %}
+
+  <div class = "text-center">
+    <h1 class = "loginheading pt-3 pb-3"><span class = "loginheading1">Login </span><span class="loginheading3">/</span><span class = "loginheading2"> Sign Up</span></h1>
+
+
+{# start  of first option for ui  without iamges #}
+
+
+    {#  </div>#}
+{#<div class = "loginbody container">#}
+{#  <div class="customer">#}
+{#    <div class = "row">#}
+{#      <div class = "col col-12  text-center">#}
+{#          <h2 class = "loginheading pt-3 pb-3"><span class = "loginheading2">Customer </span></h2>#}
+{#      </div>#}
+{#    </div>#}
+{#    <br>#}
+{#    <br>#}
+{#    <div class = "loginbuttons">#}
+{#      <button class="btn cardbutton" data-toggle="modal" data-target="#customerLoginModal">Customer Login</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#}
+{#      <button class="btn cardbutton" data-toggle="modal" data-target="#customerSignUpModal">Customer SignUp</button>#}
+{#    </div>#}
+{#  </div>#}
+{#</div>#}
+{#<br>#}
+{#<br>#}
+{#<div class="seller">#}
+{#    <div class = "row">#}
+{#      <div class = "col col-12  text-center">#}
+{##}
+{#          <h2 class = "loginheading pt-3 pb-3"><span class = "loginheading2">Seller </span></h2>#}
+{##}
+{#      </div>#}
+{#    </div>#}
+{#    <br>#}
+{#    <br>#}
+{#    <div class = "loginbuttons">#}
+{#      <button class="btn cardbutton" data-toggle="modal" data-target="#sellerloginModal">Seller Login</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;#}
+{#      <button class="btn cardbutton" data-toggle="modal" data-target="#sellerSignUpModal">Seller SignUp</button>#}
+{#    </div>#}
+{#</div>#}
+
+
+{# end  of first option for ui  without iamges #}
+
+
+{# start of second option for ui  with iamges #}
+
+     {% load static %}
+
+<div class = "loginbody container">
+  <div class="customer">
+    <div class = "row">
+      <div class = "col col-12  text-center">
+        <h3 class="display-5 text-center"><strong>Customer</strong></h3>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class = "row">
+      <div class = "col col-12  text-center">
+        <img src="{% static '/images/customerlogo.png' %}" class="logoimage">
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class = "row loginbuttons">
+      <button class="btn cardbutton" data-toggle="modal" data-target="#customerLoginModal">Customer
+        Login</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button class="btn cardbutton" data-toggle="modal" data-target="#customerSignUpModal">Customer
+        SignUp</button>
+    </div>
+  </div>
+
+  <div class="manager">
+    <div class = "row">
+      <div class = "col col-12 ">
+        <h3 class="display-5 text-center"><strong>Seller</strong></h3>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class = "row">
+      <div class = "col col-12  text-center">
+        <img src="{% static '/images/managerlogo.png' %}" class="logoimage">
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class = "row loginbuttons">
+      <button class="btn cardbutton" data-toggle="modal" data-target="#sellerloginModal">Seller
+        Login</button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button class="btn cardbutton" data-toggle="modal" data-target="#sellerSignUpModal">Seller
+        SignUp</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+{#    end of second option for ui #}
+
+{#    Customer Login Modal #}
+<div class="modal fade " id="customerLoginModal" tabindex="-1" role="dialog" aria-labelledby="customerLoginModal" aria-hidden="true" >
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="customerLoginModalTitle" >Customer Login </h5>
+                <button type="button" class="close" data-dismiss="modal"  aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <br>
+                <div class="row justify-content-center m-0">
+              <img src="{% static '/images/customerlogo.png' %}" width="100px" height="210px" class="logoimage">
+            </div>
+
+            <div class="modal-body">
+          {% csrf_token %}
+          <form action="customerlogin" method="post">
+            <div class="form-group">
+              <label for="customerloginusername">Username</label>
+              <input type="text" class="form-control" id="customerloginusername" name="customerloginusername"
+                placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+              <label for="customerloginpassword">Password</label>
+              <input type="password" class="form-control" id="customerloginpassword" name="customerloginpassword"
+                placeholder="Enter your password" required>
+            </div>
+            <div class="modal-footer">
+              <button type="Submit" class="btn cardbutton btn-block">Login</button>
+            </div>
+            {% csrf_token %}
+          </form>
+        </div>
+
+        </div>
+    </div>
+</div>
+
+
+    {#    Customer Signup  Modal #}
+
+<div class="modal fade" id="customerSignUpModal" tabindex="-1" role="dialog" aria-labelledby="customerSignUpModal"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="customerSignUpModalTitle">Customer Signup</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+          <br>
+          <div class="row justify-content-center m-0">
+              <img src="{% static '/images/customerlogo.png' %}" width="100px" height="210px" class="logoimage">
+            </div>
+        <div class="modal-body">
+          {% csrf_token %}
+          <form action="customersignup" method="post">
+            <div class="form-group">
+              <label for="customersignupusername">Username</label>
+              <input type="text" class="form-control" id="customersignupusername" name="customersignupusername"
+                placeholder="Enter your username" required>
+            </div>
+            <div class = "row">
+              <div class = "col col-6">
+                <div class="form-group">
+                  <label for="customersignupfirstname">First Name</label>
+                  <input type="text" class="form-control" id="customersignupfirstname" name="customersignupfirstname"
+                    placeholder="Enter your First Name" required>
+                </div>
+              </div>
+              <div class = "col col-6">
+                <div class="form-group">
+                  <label for="customersignuplastname">Last Name</label>
+                  <input type="text" class="form-control" id="customersignuplastname" name="customersignuplastname"
+                    placeholder="Enter your Last Name" required>
+                </div>
+              </div>
+            </div>
+            <div class = "row">
+              <div class = "col col-6">
+                <div class="form-group">
+                  <label for="customersignupemail">Email</label>
+                  <input type="email" class="form-control" id="customersignupemail" name="customersignupemail"
+                    placeholder="Enter your First NameEmail" required>
+                </div>
+              </div>
+              <div class = "col col-6">
+                <div class="form-group">
+                  <label for="customersignupphone">Phone</label>
+                  <input type="number" class="form-control" id="customersignupphone" name="customersignupphone"
+                    placeholder="Enter your Phone"  required>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="customersignuppassword">Password</label>
+              <input type="password" class="form-control" id="customersignuppassword" name="customersignuppassword"
+                placeholder="Enter your password" required>
+            </div>
+            <div class="modal-footer">
+              <button type="Submit" class="btn cardbutton btn-block">Signup</button>
+            </div>
+            {% csrf_token %}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    {#    Seller  Login Modal #}
+
+<div class="modal fade" id="sellerloginModal" tabindex="-1" role="dialog" aria-labelledby="sellerloginModal"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="sellerloginModalTitle">Seller Login</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+          <br>
+          <div class="row justify-content-center m-0">
+              <img src="{% static '/images/managerlogo.png' %}" width="100px" height="210px" class="logoimage">
+            </div>
+        <div class="modal-body">
+          {% csrf_token %}
+          <form action="sellerlogin" method="post">
+            <div class="form-group">
+              <label for="sellerloginusername">Username</label>
+              <input type="text" class="form-control" id="sellerloginusername" name="sellerloginusername"
+                placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+              <label for="sellerloginpassword">Password</label>
+              <input type="password" class="form-control" id="sellerloginpassword" name="sellerloginpassword"
+                placeholder="Enter your password" required>
+            </div>
+            <div class="modal-footer">
+              <button type="Submit" class="btn cardbutton btn-block">Login</button>
+            </div>
+            {% csrf_token %}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{#    Seller Signup  Modal #}
+
+<div class="modal fade" id="sellerSignUpModal" tabindex="-1" role="dialog" aria-labelledby="sellerSignUpModal"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="sellerSignUpModalTitle">Seller Signup</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+          <br>
+          <div class="row justify-content-center m-0">
+              <img src="{% static '/images/managerlogo.png' %}" width="100px" height="210px" class="logoimage">
+            </div>
+        <div class="modal-body">
+          {% csrf_token %}
+          <form action="sellersignup" method="post">
+            <div class="form-group">
+              <label for="sellersignupusername">Username</label>
+              <input type="text" class="form-control" id="sellersignupusername" name="sellersignupusername"
+                placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+              <label for="sellerstorename">Store / Nursery  Name</label>
+              <input type="text" class="form-control" id="sellerstorename" name="sellerstorename"
+                placeholder="Enter Store / Nursery Name" required>
+            </div>
+            <div class = "row">
+              <div class = "col col-6">
+                <div class="form-group">
+                  <label for="sellersignupfirstname">Owner First Name</label>
+                  <input type="text" class="form-control" id="sellersignupfirstname" name="sellersignupfirstname"
+                    placeholder="Enter your First Name" required>
+                </div>
+              </div>
+              <div class = "col col-6">
+                <div class="form-group">
+                  <label for="sellerignuplastname">Owner Last Name</label>
+                  <input type="text" class="form-control" id="sellersignuplastname" name="sellersignuplastname"
+                    placeholder="Enter your Last Name" required>
+                </div>
+              </div>
+            </div>
+            <div class = "row">
+              <div class = "col col-6">
+                <div class="form-group">
+                  <label for="sellersignupemail">Email</label>
+                  <input type="email" class="form-control" id="sellersignupemail" name="sellersignupemail"
+                    placeholder="Enter your First NameEmail" required>
+                </div>
+              </div>
+              <div class = "col col-6">
+                <div class="form-group">
+                  <label for="sellersignupphone">Phone</label>
+                  <input type="number" class="form-control" id="sellersignupphone" name="sellersignupphone"
+                    placeholder="Enter your Phone"  required>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="sellersignuppassword">Password</label>
+              <input type="password" class="form-control" id="sellersignuppassword" name="sellersignuppassword"
+                placeholder="Enter your password" required>
+            </div>
+            <div class="modal-footer">
+              <button type="Submit" class="btn cardbutton btn-block">Signup</button>
+            </div>
+            {% csrf_token %}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock%}
+
+{% block script %}
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+      <script src="https://js.braintreegateway.com/web/dropin/1.24.0/js/dropin.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+       <script type="text/javascript">
+       </script>
+{% endblock %}

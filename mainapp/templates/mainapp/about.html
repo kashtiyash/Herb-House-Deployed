@@ -1,0 +1,202 @@
+{% extends 'mainapp/basic.html' %}
+{% block title %}
+About-Us
+{% endblock%}
+{% block css%}
+/*--------------------------------------------------------------
+# Team
+--------------------------------------------------------------*/
+
+.loginheading{
+    font-weight: 400;
+    font-size: 4vw;
+  }
+  .loginheading1{
+    color: #216B39;
+    font: 36px Arial, sans-serif, Verdana;
+    font-size-adjust: 0.58;
+    font-weight: 800;
+    text-decoration: none;
+  }
+  .loginheading2{
+    color: #000000;
+    font: 36px Arial, sans-serif, Verdana;
+    font-size-adjust: 0.58;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+.team {
+  background: #fff;
+
+}
+
+.team{
+  justify-content:center;
+}
+.team .member {
+  position: relative;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.team .member .pic {
+  overflow: hidden;
+  width: 150px;
+  border-radius: 50%;
+  margin: 0 auto 20px auto;
+}
+
+.team .member .pic img {
+  transition: ease-in-out 0.3s;
+}
+.team .member:hover img {
+  transform: scale(1.1);
+}
+.team .member h4 {
+  font-weight: 700;
+  margin-bottom: 5px;
+  font-size: 20px;
+  color: #36343a;
+}
+.team .member span {
+  display: block;
+  font-size: 15px;
+  padding-bottom: 10px;
+  position: relative;
+  font-weight: 500;
+}
+.team .member span::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 50px;
+  height: 1px;
+  background: #b5b3ba;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.team .member p {
+  margin: 10px 0 0 0;
+  font-size: 14px;
+}
+.team .member .social {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.team .member .social a {
+  transition: ease-in-out 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  width: 34px;
+  height: 34px;
+  background: #a8a5ae;
+}
+.team .member .social a i {
+  color: #fff;
+  font-size: 16px;
+  margin: 0 2px;
+}
+.team .member .social a:hover {
+  background: #009970;
+}
+.team .member .social a + a {
+  margin-left: 8px;
+}
+{% endblock %}
+{% block body %}
+
+
+  <!-- ======= Team Section ======= -->
+{% load static %}
+    <section id="team" class="team">
+      <div class="container">
+           <div class = "text-center">
+    <h1 class = "loginheading pt-3 pb-3"><span class = "loginheading1">Our </span><span class = "loginheading2"> Team</span></h1>
+  </div>
+
+        </div>
+        <div class="container">
+          <div class="col-lg-12">
+            <div class="row">
+
+              <div class="col-lg-6">
+                <div class="member" data-aos="zoom-in" data-aos-delay="10">
+                  <div class="pic"><img src="{% static "images/1.png"%}" class="img-fluid" alt="Yash Image"></div>
+                  <div class="member-info">
+                    <h4>Yash Chikte</h4>
+                    <span></span>
+                    <div class="social">
+                      <a href=""><i class="bi bi-github"></i></a>
+                      <a href=""><i class="bi bi-facebook"></i></a>
+                      <a href=""><i class="bi bi-instagram"></i></a>
+                      <a href=""> <i class="bi bi-linkedin"></i> </a>
+                      
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 mt-4 mt-lg-0">
+                <div class="member" data-aos="zoom-in" data-aos-delay="200">
+                  <div class="pic"><img src="{% static "images/1.png"%}" class="img-fluid" alt="Aman Image"></div>
+                  <div class="member-info">
+                    <h4>Aman Ilatkar</h4>
+                      <span></span>
+                    <div class="social">
+                      <a href=""><i class="bi bi-github"></i></a>
+                      <a href=""><i class="bi bi-facebook"></i></a>
+                      <a href=""><i class="bi bi-instagram"></i></a>
+                      <a href=""> <i class="bi bi-linkedin"></i> </a> 
+                      </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 mt-4">
+                <div class="member" data-aos="zoom-in" data-aos-delay="300">
+                  <div class="pic"><img src="{% static "images/1.png"%}" class="img-fluid" alt="Yash Image"></div>
+                  <div class="member-info">
+                    <h4>Yash Kashti</h4>
+                      <span></span>
+                    <div class="social">
+                      <a href=""><i class="bi bi-github"></i></a>
+                      <a href=""><i class="bi bi-facebook"></i></a>
+                      <a href=""><i class="bi bi-instagram"></i></a>
+                      <a href="https://www.linkedin.com/in/yash-kashti-23748a202/?originalSubdomain=in" target="_blank">
+                         <i class="bi bi-linkedin"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 mt-4">
+                <div class="member" data-aos="zoom-in" data-aos-delay="400">
+                  <div class="pic"><img src="{% static "images/1.png"%}" class="img-fluid" alt="Sahil Image"></div>
+                  <div class="member-info">
+                    <h4>Sahil Mahato</h4>
+                      <span></span>
+                    <div class="social">
+                      <a href=""><i class="bi bi-github"></i></a>
+                      <a href=""><i class="bi bi-facebook"></i></a>
+                      <a href=""><i class="bi bi-instagram"></i></a>
+                      <a href=""> <i class="bi bi-linkedin"></i> </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+    </section><!-- End Team Section -->
+
+{% endblock%}

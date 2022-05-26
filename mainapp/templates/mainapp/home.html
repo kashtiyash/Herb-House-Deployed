@@ -1,0 +1,706 @@
+{% extends 'mainapp/basic.html' %}
+{% block title %}
+Herb House
+{% endblock%}
+{% load static %}
+{% block css%}
+.cardbutton
+{
+    background-color: rgba(33,107,57);
+    cursor: pointer;
+    transition: 0.6s;
+    color: white;
+}
+
+  .cardbutton:hover
+{
+    background-color: rgba(33,107,57);
+    border: 3px solid #FFFFFF;
+    transform: scale(0.9, 0.9);
+    color: white;
+    border-radius: 25px;
+}
+
+
+:root {
+    --primary-color: #0F9D58;
+    --background-color: #f0f3f7;
+    --secon-color: #9da2ad;
+    --grey: #7a7a7b;
+    --white: #ffffff;
+}
+
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    color: unset;
+    text-decoration: none;
+}
+
+body,
+html {
+    background-color: var(--background-color);
+    scroll-behavior: smooth;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99;
+    background-color: var(--background-color);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.menu-wrap {
+    max-width: 1366px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.logo {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary-color);
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-item {
+    margin-left: 1rem;
+    padding: .5rem 1.5rem;
+    font-weight: 600;
+    color: var(--grey);
+    transition: .3s ease-in-out;
+    cursor: pointer;
+}
+
+.menu-item:hover,
+.menu-item.active {
+    color: var(--white);
+    background-color: var(--primary-color);
+    border-radius: 1rem;
+}
+
+.cart-btn {
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: .5s ease-in-out;
+}
+
+.cart-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-radius: 1rem;
+}
+
+.fullheight {
+    height: 100vh;
+}
+
+.align-items-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: justify;
+}
+
+.bg-img {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url("{% static 'images/bgimage.jpg' %}");
+}
+
+.bg-img-fixed {
+    background-attachment: fixed;
+}
+
+.container {
+    width: 100%;
+    max-width: 1366px;
+    margin: 0 auto;
+}
+
+
+section {
+    padding: 9rem 0;
+}
+
+.slogan {
+    text-align: left;
+}
+
+.slogan h1 {
+    font-size: 6rem;
+    color: var(--primary-color);
+}
+.slogan h3 {
+    font-size:4rem;
+    color: var(--primary-color);
+}
+
+<!-- .slogan button {
+    padding: 1rem 5rem;
+    outline: none;
+    border: none;
+    background-color: var(--background-color);
+    border: .125rem solid var(--primary-color);
+    border-radius: 2rem;
+    color: var(--primary-color);
+    margin: 3rem 0;
+    cursor: pointer;
+    font-weight: 600;
+    transition: .5s ease-in-out;
+    opacity: 0.5;
+} -->
+
+.slogan button:hover {
+    background-color: orange;
+
+}
+
+.fullwidth {
+    width: 100%;
+}
+
+#about{
+    background-image: url("{% static 'images/alovera.jpg' %}");
+    background-position: inherit;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+#about img {
+    
+    border-radius: 2rem;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 8px 24px,
+        rgba(17, 17, 26, 0.1) 0px 16px 56px,
+        rgba(17, 17, 26, 0.1) 0px 24px 80px;
+}
+.row{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    }
+.about-slogan {
+    padding: 4rem;
+    background-color: var(--white);
+    border-radius: 2rem;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+}
+
+.about-slogan.start {
+    transform: translateX(-10rem) !important;
+}
+
+.about-slogan h3 {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    color: var(--grey);
+    }
+
+.primary-color {
+    color: var(--primary-color);
+
+}
+
+/* ANIMATION */
+
+.right-to-left {
+    transform: translateX(150%);
+    transition: 1s ease-in-out;
+}
+
+.right-to-left.start {
+    transform: translateX(0);
+}
+
+
+.zoom {
+    transform: scale(0);
+    transition: .6s ease-in-out;
+}
+
+.zoom.start {
+    transform: unset;
+}
+
+.bottom-up {
+    transform: translateY(30%);
+    transition: .8s ease-in-out;
+}
+
+.bottom-up.start {
+    transform: translateY(0);
+}
+
+.delay-2 {
+    transition-delay: .2s;
+}
+
+.delay-4 {
+    transition-delay: .4s;
+}
+
+.delay-6 {
+    transition-delay: .6s;
+}
+
+.delay-8 {
+    transition-delay: .8s;
+}
+
+.delay-10 {
+    transition-delay: .10s;
+}
+
+.delay-12 {
+    transition-delay: .12s;
+}
+
+
+
+/* GRID SYSTEM */
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+[class*="col-"] {
+    padding: 1rem;
+}
+
+.col-1 {
+    width: 8.33%;
+}
+
+.col-2 {
+    width: 16.66%;
+}
+
+.col-3 {
+    width: 25%;
+}
+
+.col-4 {
+    width: 33.33%;
+}
+
+.col-5 {
+    width: 41.66%;
+}
+
+.col-6 {
+    width: 50%;
+}
+
+.col-7 {
+    width: 58.33%;
+}
+
+.col-8 {
+    width: 66.66%;
+}
+
+.col-9 {
+    width: 75%;
+}
+
+.col-10 {
+    width: 83.33%;
+}
+
+.col-11 {
+    width: 91.66%;
+}
+
+.col-12 {
+    width: 100%;
+}
+
+.mb-nav {
+    display: none;
+}
+
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+    * {
+        font-size: 13px;
+    }
+
+    h1 {
+        font-size: 3rem !important;
+    }
+
+    span {
+        font-size: inherit;
+    }
+
+    .cart-btn i {
+        font-size: 2rem;
+    }
+
+    .about {
+        background-image: url("{% static 'images/alovera.jpg' %}");
+        background-attachment: fixed;
+    }
+
+    .about-slogan.start {
+        transform: translateX(0) !important;
+    }
+    /* MOBILE NAV */
+
+    .mb-nav {
+        position: fixed;
+        bottom: 0;
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        background-color: var(--white);
+        z-index: 99;
+        overflow: hidden;
+        border-top-left-radius: 2rem;
+        border-top-right-radius: 2rem;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+
+    .mb-nav-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 25%;
+        padding: 1rem 0;
+    }
+
+    .mb-nav-item i,
+    .mb-nav-item a {
+        font-size: 2rem;
+        color: var(--secon-color);
+        z-index: 2;
+        transition: .5s ease-in-out;
+    }
+
+    .mb-nav-item.active i {
+        color: var(--white);
+    }
+
+    .mb-move-item {
+        position: absolute;
+        left: 0;
+        width: 25%;
+        height: 100%;
+        background-color: var(--primary-color);
+        transition: .5s ease-in-out;
+    }
+
+    /* END MOBILE NAV */
+
+    .col-xs-1 {
+        width: 8.33%;
+    }
+
+    .col-xs-2 {
+        width: 16.66%;
+    }
+
+    .col-xs-3 {
+        width: 25%;
+    }
+
+    .col-xs-4 {
+        width: 33.33%;
+    }
+
+    .col-xs-5 {
+        width: 41.66%;
+    }
+
+    .col-xs-6 {
+        width: 50%;
+    }
+
+    .col-xs-7 {
+        width: 58.33%;
+    }
+
+    .col-xs-8 {
+        width: 66.66%;
+    }
+
+    .col-xs-9 {
+        width: 75%;
+    }
+
+    .col-xs-10 {
+        width: 83.33%;
+    }
+
+    .col-xs-11 {
+        width: 91.66%;
+    }
+
+    .col-xs-12 {
+        width: 100%;
+    }
+
+    .h-xs {
+        display: none;
+    }
+}
+ .logoimage {
+    max-width: 250px;
+    max-height: 250px;
+  }
+{% endblock%}
+{% block body %}
+{%  load static %}
+
+    <!-- SECTION HOME -->
+    <section id="home" class="fullheight align-items-center bg-img bg-img-fixed">
+
+        <div class="container">
+            <div class="row">
+
+                <div class="col-7 col-xs-10">
+                    <div class="slogan">
+                        <h3 class="left-to-right play-on-scroll">
+                            Welcome
+                        </h3>
+                        <h3 class="left-to-right play-on-scroll">
+                             to
+                        </h3>
+                        <h1 class="left-to-right play-on-scroll">
+                            Herb House
+                        </h1>
+                        <p class="left-to-right play-on-scroll delay-2">
+                            Ayurveda, a natural system of medicine, originated in India more than 3,000 years ago.
+                            The term Ayurveda is derived from the Sanskrit words ayur (life) and veda (science or
+                            knowledge).
+                            
+                        </p>
+                        <p>
+                            Thus, Ayurveda translates to knowledge of life. Herbs play an important role in Ayurveda.
+                            90% of the Ayurvedic medicines is made from herbs.
+                        </p>
+                        <div class="btn">
+                            <button>
+                                <li class="btn btn" >
+                                    <a href="./productlist/"><strong>Products</strong></a>
+                                </li>
+                            </button>
+                        </div>
+                     
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- END SECTION HOME -->
+
+
+
+    <!-- SECION ABOUT -->
+    <section class="about fullheight align-items-center" id="about">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-6  col-xs-12 align-items-center">
+                   <img src="{% static "images/logo.png"%}" class="fullwidth left-to-right play-on-scroll" alt="image">
+                </div>
+
+
+                <div class="col-5 col-xs-12 align-items-center">
+                    <div class="about-slogan">
+                        <h3>
+                            <span class="primary-color">We</span> sell <span class="primary-color"> healing herbs</span>
+                            for <span class="primary-color">you</span>
+                        </h3>
+                        <p>
+                            We the founders of Herb House aim to create a marketplace where we can sell herbs that are used to make Ayurvedic medicine.
+                    We made a marketplace where the nurseries can list their herbs in our site and sell them.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END SECION ABOUT -->
+
+
+{# Start of Profile Modal #}
+<div class="modal fade" id="profileModal" tabindex="-1" role="dialog" aria-labelledby="profileModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="profileModalTitle">Username : <strong><span class="userNameHeader"> {{request.user.username}} </span></strong></h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+      <br>
+            <div class="row justify-content-center m-0">
+              <img src="{% static '/images/customer1.png' %}" width="120px" height="200px" class="logoimage">
+            </div>
+
+        <div class="modal-body">
+          {% csrf_token %}
+
+          <form action="profileDetails" method="post">
+             <div class = "row">
+              <div class = "col col-6">
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" class="form-control form-control-lg" id="firstName" name="customerFirstName" value="{{request.user.first_name}}" readonly>
+            </div>
+              </div>
+
+
+              <div class = "col col-6">
+            <div class="form-group">
+              <label for="LastName">Last Name</label>
+               <input type="text" class="form-control form-control-lg" id="LastName" name="customerLastName" value="{{request.user.last_name}}" readonly>
+            </div>
+              </div>
+             </div>
+
+
+            <div class = "row">
+              <div class = "col col-12">
+                <div class="form-group">
+                  <label for="CustomerEmail">Email</label>
+                      <input type="text" class="form-control form-control-lg" id="CustomerEmail" name="CustomerEmail" value="{{request.user.email}}" readonly>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class = "col col-12">
+                <div class="form-group">
+                  <label for="sellersignupphone">Phone</label>
+                    {% if user.customer %}
+                    <input type="phone1" class="form-control" id="sellersignupphone1" name="sellersignupphone1"  value="{{request.user.customer.phone}}" readonly>
+                    {% else %}
+                    <input type="phone2" class="form-control" id="sellersignupphone2" name="sellersignupphone2"  value="{{request.user.seller.phone}}" readonly>
+                    {% endif %}
+                </div>
+              </div>
+            </div>
+
+            {% csrf_token %}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{# End of Profile Modal #}
+
+
+
+{% endblock%}
+{% block js %}
+var interval = setInterval(function() {
+        $('#counter').text(number);
+        if (number >= 5000) clearInterval(interval);
+        number++;
+    }, 30);
+
+// back tot top
+
+let backToTopBtn = document.querySelector('.back-to-top')
+
+window.onscroll = () => {
+    if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        backToTopBtn.style.display = 'flex'
+    } else {
+        backToTopBtn.style.display = 'none'
+    }
+}
+
+// top nav menu
+
+let menuItems = document.getElementsByClassName('menu-item')
+
+Array.from(menuItems).forEach((item, index) => {
+    item.onclick = (e) => {
+        let currMenu = document.querySelector('.menu-item.active')
+        currMenu.classList.remove('active')
+        item.classList.add('active')
+    }
+})
+
+
+// on scroll animation
+
+let scroll = window.requestAnimationFrame || function(callback) {window.setTimeout(callback, 1000/60)}
+
+let elToShow = document.querySelectorAll('.play-on-scroll')
+
+isElInViewPort = (el) => {
+    let rect = el.getBoundingClientRect()
+
+    return (
+        (rect.top <= 0 && rect.bottom >= 0)
+        ||
+        (rect.bottom >= (window.innerHeight || document.documentElement.clientHeight) && rect.top <= (window.innerHeight || document.documentElement.clientHeight))
+        ||
+        (rect.top >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight))
+    )
+}
+
+loop = () => {
+    elToShow.forEach((item, index) => {
+        if (isElInViewPort(item)) {
+            item.classList.add('start')
+        } else {
+            item.classList.remove('start')
+        }
+    })
+
+    scroll(loop)
+}
+
+loop()
+
+// mobile nav
+
+let bottomNavItems = document.querySelectorAll('.mb-nav-item')
+
+let bottomMove = document.querySelector('.mb-move-item')
+
+bottomNavItems.forEach((item, index) => {
+    item.onclick = (e) => {
+        console.log('object')
+        let crrItem = document.querySelector('.mb-nav-item.active')
+        crrItem.classList.remove('active')
+        item.classList.add('active')
+        bottomMove.style.left = index * 25 + '%'
+    }
+})
+
+{% endblock %}

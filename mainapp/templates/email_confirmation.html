@@ -1,0 +1,9 @@
+{% autoescape off %}
+Welcome to Herb House
+
+Hello {{ name }} !!
+
+Please confirm the email by clicking on the following link.
+
+Confirmation Link : http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+{% endautoescape  %}

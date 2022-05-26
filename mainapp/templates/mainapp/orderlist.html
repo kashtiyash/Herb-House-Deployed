@@ -1,0 +1,191 @@
+{% extends 'mainapp/basic.html' %}
+{% block title %}
+Orders
+{% endblock%}
+{% block css%}
+
+.loginheading{
+font-weight: 400;
+font-size: 4vw;
+}
+
+
+.loginheading1{
+color: #216B39;
+font: 34px Arial, sans-serif, Verdana;
+font-size-adjust: 0.58;
+font-weight: 700;
+text-decoration: none;
+}
+
+.loginheading2{
+color: #000000;
+font: 34px Arial, sans-serif, Verdana;
+font-size-adjust: 0.58;
+font-weight: 700;
+text-decoration: none;
+}
+
+.productdetails{
+width: 100%;
+padding: 20px;
+box-shadow: 1px 4px 10px 1px #aaa;
+}
+
+#productDetails{
+display:flex;
+}
+
+#productDetails orderDetails{
+display:flex;
+}
+
+.wrapper {
+    text-align: center;
+}
+
+.button {
+    position: absolute;
+    top: 50%;
+}
+{% endblock %}
+
+
+{% block body %}
+
+<div class="container">
+  <div class="row">
+    <div class="col text-center">
+      <div class="row  mt-5 mb-5 pt-3">
+        <div class="col text-center">
+          <h2 class="loginheading"><span class="loginheading1">My </span><span class="loginheading2">Orders</span>
+          </h2>
+        </div>
+      </div>
+
+{#    Oder details section #}
+      {% for product in props  %}
+
+      <div class="row mb-5" id="productDetails">
+        <div class="col text-left">
+          <div class="productdetails">
+            <div class="row">
+              <div class="col col-6" id="orderDetails">
+                <strong>Product Id: </strong> {{product.product_id}}
+              </div>
+              <div class="col col-6">
+                <strong>Order Id: </strong> {{product.order_id}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col col-6">
+                <strong>Product Price: </strong> {{product.order_total}}
+              </div>
+              <div class="col col-6">
+                <strong>Product Quantity: </strong> {{product.quantity}}
+              </div>
+            </div>
+            <div class="row">
+                <div class="col col-6">
+              <div class="col"><strong>Address: </strong> {{product.address}}</div>
+            </div>
+              <div class="col"><strong>Store ID : </strong> {{product.store_id}}</div>
+            </div>
+            {% csrf_token %}
+
+              <br>
+
+              <div class="row">
+                <div class="col col-12 ">
+
+                    <form action="cancelorder" method="post">
+                    {% csrf_token %}
+                      <input type="text" class="form-control form-control-lg" id="orderid"
+                          name="orderid" value="{{product.order_id}}" hidden>
+                      <button type="button buynow" class="btn btn-outline-danger">Cancel Item</button>
+                    </form>
+                </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{# End of order detail section #}
+
+{#    Total payable amount button section #}
+{%  if amount  %}
+    <div class="wrapper">
+        <div class="vertical-center">
+            <form action="payOrder" method="post">
+                {% csrf_token %}
+                <label for="orderid"></label>
+                <input type="text" class="form-control form-control-lg" id="orderid"
+                                                    name="orderid" value={{ amount }} hidden>
+                <button id="rzp-button1" type="button" class="btn btn-outline-success"><strong>Pay Online: Rs </strong> {{ amount }}</button>
+            </form>
+        </div>
+    </div>
+{% endif %}
+{#   End of  Total payable amount button section #}
+
+{% endblock%}
+
+
+{% block script %}
+
+     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+ {% for product in props  %}
+    <script>
+
+        {%  if r_total  %}
+
+            var options = {
+    "key": "rzp_test_JOCMcVU96cdXFg", // Enter the Key ID generated from the Dashboard
+    "amount": "{{ r_total }}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "Herb House",
+    "description": "Purchase Transaction",
+    {#"image": "https://example.com/your_logo",#}
+    "order_id": "{{ product.product.id }}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "handler": function (response){
+        alert(response.razorpay_payment_id);
+        alert(response.razorpay_order_id);
+        alert(response.razorpay_signature)
+    },
+    "prefill": {
+        "name": "Yash Kashti",
+        "email": "yashkashti@gmail.com",
+        "contact": "8007416963"
+    },
+    "notes": {
+        "address": "Herb House Office"
+    },
+    "theme": {
+        "color": "#0c8fc7"
+    }
+};
+{% endif %}
+
+var rzp1 = new Razorpay(options);
+rzp1.on('payment.failed', function (response){
+        alert(response.error.code);
+        alert(response.error.description);
+        alert(response.error.source);
+        alert(response.error.step);
+        alert(response.error.reason);
+        alert(response.error.metadata.order_id);
+        alert(response.error.metadata.payment_id);
+});
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+</script>
+
+{% endfor %}
+{% endblock %}

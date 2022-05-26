@@ -1,0 +1,278 @@
+{% extends 'mainapp/basic.html' %}
+{% load static %}
+
+{% block title %}
+Product Lists
+{% endblock %}
+
+
+{%block css%}
+
+#feedback-form {
+width: 100%;
+padding: 20px 50px 40px;
+box-shadow: 1px 4px 10px 1px #aaa;
+}
+
+
+#feedback-form h2{
+text-align: center;
+margin-bottom: 30px;
+}
+
+#feedback-form input {
+margin-bottom: 15px;
+margin-top: 15px;
+}
+
+#feedback-form input[type=text] {
+display: block;
+height: 32px;
+padding: 6px 16px;
+width: 100%;
+border: none;
+background-color: #f3f3f3;
+}
+
+#feedback-form textarea {
+display: block;
+padding: 6px 16px;
+width: 100%;
+border: none;
+background-color: #f3f3f3;
+}
+
+.loginheading{
+    font-weight: 400;
+    font-size: 4vw;
+  }
+  .loginheading1{
+    color: #216B39;
+    font: 34px Arial, sans-serif, Verdana;
+    font-size-adjust: 0.58;
+    font-weight: 800;
+    text-decoration: none;
+  }
+  .loginheading2{
+    color: #000000;
+    font: 34px Arial, sans-serif, Verdana;
+    font-size-adjust: 0.58;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+
+.loginheading3{
+    color : #FF0000;
+    font: 40px Arial, sans-serif, Verdana;
+    font-size-adjust: 0.58;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.cardbutton {
+background-color: rgba(33,107,57);
+cursor: pointer;
+transition: 0.4s;
+color: white;
+}
+
+.cardbutton:hover {
+background-color: rgba(33,107,57);
+border: 3px solid #FFFFFF;
+transform: scale(0.9, 0.9);
+color: white;
+border-radius: 25px;
+}
+
+.productdetails{
+width: 100%;
+padding: 20px;
+box-shadow: 1px 4px 10px 1px #aaa;
+}
+
+.input-group-text {
+    display: flex;
+    align-items: center;
+    padding: 0.725rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    white-space: nowrap;
+    background-color: #e9ecef;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+.pull-right{
+    float: right;
+}
+{% endblock %}
+
+{% block body %}
+{% load static %}
+
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="row  mt-5 mb-5 pt-3">
+        <div class="col text-center">
+          <h2 class="loginheading"><span class="loginheading1">Plants </span><span class="loginheading2">Nearby</span>
+          </h2></div>
+      </div>
+      {% for product in products %}
+      <div class="row mb-5">
+        <div class="col text-left">
+          <div class="productdetails">
+            <div class="row">
+              <div class="col col-2">
+                <img src="{{product.product_image.url}}" class="card-img-top cardimage mt-3" style="width:125px ; height:125px; margin-left: auto; margin-right: auto;" alt="product image">
+              </div>
+              <div class="col col-10">
+                
+                <div class="row">
+                  <div class="col col-6">
+                    <strong>Product Name: </strong> {{product.name}}
+                  </div>
+                  <div class="col col-6">
+                    <strong>Product Id: </strong> {{product.product_id}}
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col col-6">
+                    <strong>Product Price: </strong> {{product.price}}
+                  </div>
+                  <div class="col col-6">
+                    <strong>Product Quantity: </strong> {{product.quantity}}
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="container"><strong>Product Description: </strong><p>{{product.description}}</p></div>
+                </div>
+                  <br>
+                <div class="pull-right">
+                  <button type="button" class="btn btn-warning" data-toggle="modal"
+                    data-target="#orderModal{{product.product_id}}">Buy Now</button>
+                </div>
+              </div>
+              </div>
+            </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+
+
+
+
+    {% for product in products  %}
+    <div class="modal fade" id="orderModal{{product.product_id}}" tabindex="-1" role="dialog"
+      aria-labelledby="orderModal{{product.product_id}}" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content modalback">
+          <div class="modal-header">
+            <h4 class="modal-title" id="orderModalTitle"><strong>Product Name: </strong>
+              <strong> {{product.name}} </strong>
+            </h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form action="order" method="post">
+              <div class="row">
+                <div class="col col-6">
+                  <label for="productid">Product Id</label>
+                  <div class="form-group mb-3">
+                    <input type="text" class="form-control form-control-lg" id="productid" name="productid"
+                      value="{{product.product_id}}" readonly>
+                  </div>
+                </div>
+                <div class="col col-6">
+                  <label for="storeid">Store ID</label>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend ">
+                      <span class="input-group-text" id="basic-addon1">@</span>
+                    </div>
+                    <input type="text" class="form-control form-control-lg" id="storeid" name="storeid"
+                      value="{{product.store_id}}" readonly>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col col-6">
+                  <div class="form-group">
+                    <label for="customerfirstname" class="required">Customer First Name</label>
+                    <input type="text" class="form-control form-control-lg" id="customerfirstname"
+                      name="customerfirstname" value="{{request.user.first_name}}" readonly>
+                  </div>
+                </div>
+                <div class="col col-6">
+                  <div class="form-group">
+                    <label for="customerlastname" class="required">Customer Last Name</label>
+                    <input type="text" class="form-control form-control-lg" id="customerlastname"
+                      name="customerlastname" value="{{request.user.last_name}}" readonly>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col col-6">
+                  <div class="form-group">
+                    <label for="customeremail" class="required">Email address</label>
+                    <input type="email" class="form-control form-control-lg" id="customeremail" name="customeremail"
+                      value="{{request.user.email}}" readonly>
+                  </div>
+                </div>
+                <div class="col col-6">
+                  <div class="form-group">
+                    <label for="customerphone" class="required">Mobile Number</label>
+                    <input type="tel" class="form-control form-control-lg" id="customerphone" name="customerphone"
+                      value="{{request.user.customer.phone}}" readonly>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col col-6">
+                  <div class="form-group">
+                    <label for="productprice" class="required">Price</label>
+                    <input type="text" class="form-control form-control-lg" id="productprice" name="productprice"
+                      value="{{product.price}}" readonly>
+                  </div>
+                </div>
+                <div class="col col-6">
+                  <div class="form-group">
+                    <label for="productquantity" class="required">Quantity</label>
+                    <input type="number" class="form-control form-control-lg" id="productquantity" name="productquantity"
+                      value="{{1}}">
+
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="customeraddress" class="required">Address</label>
+                    <textarea type="text" class="form-control form-control-lg" id="customeraddress"
+                      name="customeraddress" rows="3" placeholder="Enter Address" required></textarea>
+                  </div>
+                </div>
+              </div>
+              <input type="text" class="form-control form-control-lg" id="customerid" name="customerid"
+                value="{{request.user.username}}" hidden>
+              {% csrf_token %}
+              <div class="modal-footer">
+                <button type="submit" class="btn cardbutton btn-block">Add to Orders List</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

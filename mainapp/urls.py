@@ -37,6 +37,7 @@ urlpatterns = [
     path("manageorders/confirmorder", views.confirmOrder, name="confirmOrder"),
     path("manageorders/cancelorder", views.cancelOrder, name="cancelOrder"),
 
+    #Email Verification url
     path("activate/<uidb64>/<token>", views.activate, name="activate"),
 
 ]
